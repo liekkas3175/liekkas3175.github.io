@@ -111,7 +111,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/life/" style="font-size: 15px;">life</a> <a href="/tags/technology/" style="font-size: 20px;">technology</a>
+						<a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/life/" style="font-size: 15px;">life</a> <a href="/tags/technology/" style="font-size: 20px;">technology</a>
 					</div>
 				</section>
 				
@@ -178,6 +178,67 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-web-print" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/01/26/web-print/" class="article-date">
+  	<time datetime="2018-01-26T09:18:28.000Z" itemprop="datePublished">2018-01-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/26/web-print/">web-print</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前做健康管理系统时候，调查了很久的web打印，纯粹的css来控制打印样式实际效果并不理想，对于简单的页面实现尚可，复杂的例如需要设置页眉页脚、页数等的就无可奈何了，只能借助一些第三方插件jsPDF之类。<br>下面简单描述下CSS可以控制的内容：</p>
+<p><strong>1、针对打印的样式，而不是屏幕显示样式</strong><br>针对打印做的一些特殊样式，可以使用css的媒体查询来实现：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> print &#123;</span><br><span class="line">    <span class="selector-tag">body</span> &#123; </span><br><span class="line">        <span class="attribute">color</span>: <span class="number">#000</span>; <span class="attribute">background</span>: <span class="number">#fff</span>; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>2、保证不被跨页打印</strong><br>使用page-break-after属性可以避免在元素后插入分页符：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h2</span>, <span class="selector-tag">h3</span> &#123; </span><br><span class="line">    <span class="attribute">page-break-after</span>: avoid; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>3、确保某内容，在新的一页开始</strong><br>使用page-break-before属性可以控制某些元素打印的时候一定会在新的一页开始：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">article</span> &#123;</span><br><span class="line">    <span class="attribute">page-break-before</span>: always;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>4、确保某内容，在新的一页开始</strong><br>使用page-break-inside属性可以控制某些元素打印的时候不会被分页，亲测chrome中效果较好：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ul</span>, <span class="selector-tag">img</span> &#123;</span><br><span class="line">    <span class="attribute">page-break-inside</span>: avoid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>5、背景图片和颜色</strong><br>需要打印背景和图片时（彩色打印），需要添加如下媒体查询样式，该样式chrome支持较好：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> print &#123;</span><br><span class="line">    * &#123;</span><br><span class="line">        <span class="attribute">-webkit-print-color-adjust</span>: exact;</span><br><span class="line">        <span class="attribute">print-color-adjust</span>: exact;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上目前开发中遇到的可以做优化的，推荐chrome浏览器效果较好，但是整体还是有点弱哎。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/technology/">technology</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-es6-note-first" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -565,7 +626,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2016 Liekkas
+    		&copy; 2018 Liekkas
     	</div>
     </div>
   </div>
